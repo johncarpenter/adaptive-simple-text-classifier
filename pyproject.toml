@@ -1,0 +1,74 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "adaptive-classifier"
+version = "0.1.0"
+description = "Self-building hybrid classifier: FAISS embeddings + LLM fallback with feedback loop"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+authors = [{name = "2Lines Software Inc"}]
+keywords = ["classification", "nlp", "faiss", "llm", "embeddings", "machine-learning"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Text Processing",
+]
+dependencies = [
+    "numpy>=1.24",
+    "faiss-cpu>=1.7",
+    "sentence-transformers>=2.2",
+]
+
+[project.urls]
+Homepage = "https://github.com/2lines-software/adaptive-classifier"
+Repository = "https://github.com/2lines-software/adaptive-classifier"
+Issues = "https://github.com/2lines-software/adaptive-classifier/issues"
+
+[project.optional-dependencies]
+anthropic = ["anthropic>=0.39"]
+vertex = ["anthropic[vertex]>=0.39"]
+bedrock = ["anthropic[bedrock]>=0.39"]
+all = [
+    "anthropic>=0.39",
+    "anthropic[vertex]>=0.39",
+    "anthropic[bedrock]>=0.39",
+]
+dev = [
+    "pytest>=7.0",
+    "pytest-asyncio>=0.21",
+    "ruff>=0.4",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=7.0",
+    "pytest-asyncio>=0.21",
+    "ruff>=0.4",
+    "pandas>=2.0",
+    "pyarrow>=14.0",
+    "anthropic>=0.39",
+]
+
+[tool.uv]
+default-groups = ["dev"]
+
+[tool.setuptools.packages.find]
+where = ["."]
+exclude = ["tests*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+target-version = "py310"
+line-length = 100
