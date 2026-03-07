@@ -3,7 +3,7 @@ requires = ["setuptools>=68.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "adaptive-classifier"
+name = "adaptive-simple-text-classifier"
 version = "0.1.0"
 description = "Self-building hybrid classifier: FAISS embeddings + LLM fallback with feedback loop"
 readme = "README.md"
@@ -30,9 +30,9 @@ dependencies = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/2lines-software/adaptive-classifier"
-Repository = "https://github.com/2lines-software/adaptive-classifier"
-Issues = "https://github.com/2lines-software/adaptive-classifier/issues"
+Homepage = "https://github.com/johncarpenter/adaptive-simple-text-classifier"
+Repository = "https://github.com/johncarpenter/adaptive-simple-text-classifier"
+Issues = "https://github.com/johncarpenter/adaptive-simple-text-classifier/issues"
 
 [project.optional-dependencies]
 anthropic = ["anthropic>=0.39"]

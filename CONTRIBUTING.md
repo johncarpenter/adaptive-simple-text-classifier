@@ -1,4 +1,4 @@
-# Contributing to adaptive-classifier
+# Contributing to adaptive-simple-text-classifier
 
 Thanks for your interest in contributing! This guide will help you get started.
 
@@ -13,8 +13,8 @@ Thanks for your interest in contributing! This guide will help you get started.
 ### Setup
 
 ```bash
-git clone https://github.com/2lines-software/adaptive-classifier.git
-cd adaptive-classifier
+git clone https://github.com/johncarpenter/adaptive-simple-text-classifier.git
+cd adaptive-simple-text-classifier
 uv sync
 ```
 
@@ -145,7 +145,7 @@ example/
 
 ## Reporting Issues
 
-- Use the [GitHub issue tracker](https://github.com/2lines-software/adaptive-classifier/issues)
+- Use the [GitHub issue tracker](https://github.com/johncarpenter/adaptive-simple-text-classifier/issues)
 - Include Python version, OS, and package version
 - Provide a minimal reproduction if possible
 - For bugs, include the full traceback

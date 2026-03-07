@@ -1,8 +1,8 @@
-# adaptive-classifier
+# adaptive-simple-text-classifier
 
-[![CI](https://github.com/2lines-software/adaptive-classifier/actions/workflows/ci.yml/badge.svg)](https://github.com/2lines-software/adaptive-classifier/actions/workflows/ci.yml)
-[![PyPI](https://img.shields.io/pypi/v/adaptive-classifier)](https://pypi.org/project/adaptive-classifier/)
-[![Python](https://img.shields.io/pypi/pyversions/adaptive-classifier)](https://pypi.org/project/adaptive-classifier/)
+[![CI](https://github.com/johncarpenter/adaptive-simple-text-classifier/actions/workflows/ci.yml/badge.svg)](https://github.com/johncarpenter/adaptive-simple-text-classifier/actions/workflows/ci.yml)
+[![PyPI](https://img.shields.io/pypi/v/adaptive-simple-text-classifier)](https://pypi.org/project/adaptive-simple-text-classifier/)
+[![Python](https://img.shields.io/pypi/pyversions/adaptive-simple-text-classifier)](https://pypi.org/project/adaptive-simple-text-classifier/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
 Self-building hybrid text classifier. FAISS embedding search with LLM fallback and automatic feedback loop.
@@ -12,13 +12,13 @@ Classifies messy, abbreviated text into structured taxonomies. The index grows a
 ## Install
 
 ```bash
-pip install adaptive-classifier
+pip install adaptive-simple-text-classifier
 
 # With LLM provider:
-pip install adaptive-classifier[anthropic]   # Direct Anthropic API
-pip install adaptive-classifier[vertex]      # Google Cloud Vertex AI
-pip install adaptive-classifier[bedrock]     # AWS Bedrock
-pip install adaptive-classifier[all]         # All providers
+pip install adaptive-simple-text-classifier[anthropic]   # Direct Anthropic API
+pip install adaptive-simple-text-classifier[vertex]      # Google Cloud Vertex AI
+pip install adaptive-simple-text-classifier[bedrock]     # AWS Bedrock
+pip install adaptive-simple-text-classifier[all]         # All providers
 ```
 
 ## How It Works
@@ -349,8 +349,8 @@ adaptive_classifier/
 
 ```bash
 # Clone the repo
-git clone https://github.com/2lines-software/adaptive-classifier.git
-cd adaptive-classifier
+git clone https://github.com/johncarpenter/adaptive-simple-text-classifier.git
+cd adaptive-simple-text-classifier
 
 # Install with uv (recommended)
 uv sync
@@ -386,7 +386,7 @@ Contributions are welcome! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for gui
 
 ## Releasing
 
-Releases are published to [PyPI](https://pypi.org/project/adaptive-classifier/) automatically when a GitHub release is created.
+Releases are published to [PyPI](https://pypi.org/project/adaptive-simple-text-classifier/) automatically when a GitHub release is created.
 
 To create a new release:
 
@@ -394,7 +394,7 @@ To create a new release:
 2. Commit: `git commit -am "Bump version to X.Y.Z"`
 3. Tag: `git tag vX.Y.Z`
 4. Push: `git push origin main --tags`
-5. Create a [GitHub release](https://github.com/2lines-software/adaptive-classifier/releases/new) from the tag
+5. Create a [GitHub release](https://github.com/johncarpenter/adaptive-simple-text-classifier/releases/new) from the tag
 
 The [publish workflow](.github/workflows/publish.yml) will build and upload to PyPI using trusted publishing.
 
