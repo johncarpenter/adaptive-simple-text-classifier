@@ -11,8 +11,6 @@ import pytest
 from adaptive_classifier.vector_stores import FaissVectorStore, VectorStore
 from adaptive_classifier.index import ClassificationIndex
 from adaptive_classifier.embeddings import CallableEmbedder
-from adaptive_classifier.types import ClassificationSource
-
 
 # ---------------------------------------------------------------------------
 # Mock in-memory vector store (simulates a DB-backed store)
