@@ -65,18 +65,19 @@ class ClassificationIndex:
         if not self.index_path:
             return False
         meta_path = self.index_path.with_suffix(".meta.json")
-        # Check for any known vector file extension
-        vector_exists = any(
-            self.index_path.with_suffix(ext).exists()
-            for ext in (".faiss", ".vectors", ".bin", ".index")
-        )
-        return meta_path.exists() and vector_exists
+        if not meta_path.exists():
+            return False
+        # DB-backed stores manage their own persistence — only need metadata file
+        if self._store.file_suffix is None:
+            return True
+        vector_path = self.index_path.with_suffix(self._store.file_suffix)
+        return vector_path.exists()
 
-    def _vector_file_path(self) -> Path:
-        """Resolve the vector file path, preferring .faiss for the default store."""
-        if isinstance(self._store, FaissVectorStore):
-            return self.index_path.with_suffix(".faiss")
-        return self.index_path.with_suffix(".vectors")
+    def _vector_file_path(self) -> Path | None:
+        """Resolve the vector file path, or None if the store manages its own persistence."""
+        if self._store.file_suffix is None:
+            return None
+        return self.index_path.with_suffix(self._store.file_suffix)
 
     def seed_taxonomy(self, leaf_paths: list[str]) -> int:
         """Seed the index with taxonomy leaf labels.
@@ -235,24 +236,27 @@ class ClassificationIndex:
         meta_path = self.index_path.with_suffix(".meta.json")
 
         self.index_path.parent.mkdir(parents=True, exist_ok=True)
-        self._store.save(vector_path)
+
+        if vector_path is not None:
+            self._store.save(vector_path)
 
         with open(meta_path, "w") as f:
             json.dump(self._metadata, f)
 
-        logger.info(f"Saved index ({self.size} vectors) to {vector_path}")
+        logger.info(f"Saved index ({self.size} vectors) to {vector_path or 'db-backed store'}")
 
     def _load(self) -> None:
         """Load index and metadata from disk."""
         vector_path = self._vector_file_path()
         meta_path = self.index_path.with_suffix(".meta.json")
 
-        self._store.load(vector_path)
+        if vector_path is not None:
+            self._store.load(vector_path)
 
         with open(meta_path) as f:
             self._metadata = json.load(f)
 
-        logger.info(f"Loaded index ({self.size} vectors) from {vector_path}")
+        logger.info(f"Loaded index ({self.size} vectors) from {vector_path or 'db-backed store'}")
 
     def clear(self) -> None:
         """Reset the index."""

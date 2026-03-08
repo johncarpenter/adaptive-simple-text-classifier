@@ -25,6 +25,11 @@ class VectorStore(Protocol):
         """Number of vectors in the store."""
         ...
 
+    @property
+    def file_suffix(self) -> str | None:
+        """File extension for persistence, or None if store manages its own persistence."""
+        ...
+
     def add(self, vectors: np.ndarray) -> None:
         """Add vectors to the store. vectors is (N, dimension) float32."""
         ...
@@ -76,6 +81,10 @@ class FaissVectorStore:
     @property
     def size(self) -> int:
         return self._index.ntotal
+
+    @property
+    def file_suffix(self) -> str | None:
+        return ".faiss"
 
     def add(self, vectors: np.ndarray) -> None:
         self._index.add(vectors)
