@@ -5,7 +5,17 @@ Classifies messy text into structured taxonomies.
 """
 
 from .classifier import AdaptiveClassifier
-from .embeddings import CallableEmbedder, EmbeddingProvider, SentenceTransformerEmbedder
+from .embeddings import CallableEmbedder, EmbeddingProvider
+
+# Lazy imports for optional embedding providers
+def __getattr__(name):
+    if name == "SentenceTransformerEmbedder":
+        from .embeddings import SentenceTransformerEmbedder
+        return SentenceTransformerEmbedder
+    if name == "OpenAIEmbedder":
+        from .embeddings import OpenAIEmbedder
+        return OpenAIEmbedder
+    raise AttributeError(f"module {__name__!r} has no attribute {name!r}")
 from .index import ClassificationIndex
 from .normalizer import create_normalizer, DEFAULT_ABBREVIATIONS
 from .providers import (
@@ -24,7 +34,7 @@ from .types import (
     ClassificationSource,
 )
 
-__version__ = "0.1.2"
+__version__ = "0.2.0"
 
 __all__ = [
     "AdaptiveClassifier",
@@ -44,6 +54,7 @@ __all__ = [
     # Embeddings
     "EmbeddingProvider",
     "SentenceTransformerEmbedder",
+    "OpenAIEmbedder",
     "CallableEmbedder",
     # Index
     "ClassificationIndex",

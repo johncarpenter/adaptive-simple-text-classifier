@@ -12,7 +12,7 @@ import time
 from pathlib import Path
 from typing import Any, Callable
 
-from .embeddings import EmbeddingProvider, SentenceTransformerEmbedder
+from .embeddings import EmbeddingProvider
 from .index import ClassificationIndex
 from .providers import LLMProvider, resolve_provider
 from .taxonomy import Taxonomy
@@ -92,7 +92,11 @@ class AdaptiveClassifier:
             raise TypeError(f"Unsupported taxonomy type: {type(taxonomy)}")
 
         # Resolve embedder
-        self.embedder = embedder or SentenceTransformerEmbedder(embedding_model)
+        if embedder is not None:
+            self.embedder = embedder
+        else:
+            from .embeddings import SentenceTransformerEmbedder
+            self.embedder = SentenceTransformerEmbedder(embedding_model)
 
         # Build index
         self.index = ClassificationIndex(
